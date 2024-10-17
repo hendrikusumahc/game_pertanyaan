@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game Pertanyaan Jawaban Singkat</title>
+  <style>
+    /* CSS untuk mempercantik tampilan */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .pertanyaan {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .jawaban {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Game Pertanyaan Jawaban Singkat</h1>
+  <div id="pertanyaan"></div>
+  <input type="text" id="jawaban" placeholder="Masukkan jawaban">
+  <button id="submit">Submit</button>
+  <div id="hasil"></div>
+
+  <script>
+    // JavaScript untuk mengatur game
+    const pertanyaan = [
+      { pertanyaan: "Apa nama ibu kota Indonesia?", jawaban: "Jakarta" },
+      { pertanyaan: "Apa nama presiden pertama Indonesia?", jawaban: "Soekarno" },
+      { pertanyaan: "Apa nama gunung tertinggi di Indonesia?", jawaban: "Puncak Jaya" }
+    ];
+
+    let currentPertanyaan = 0;
+
+    function tampilkanPertanyaan() {
+      const pertanyaanElement = document.getElementById("pertanyaan");
+      pertanyaanElement.innerHTML = pertanyaan[currentPertanyaan].pertanyaan;
+    }
+
+    function cekJawaban() {
+      const jawabanElement = document.getElementById("jawaban");
+      const jawaban = jawabanElement.value;
+      const hasilElement = document.getElementById("hasil");
+
+      if (jawaban.toLowerCase() === pertanyaan[currentPertanyaan].jawaban.toLowerCase()) {
+        hasilElement.innerHTML = "Benar!";
+      } else {
+        hasilElement.innerHTML = "Salah!";
+      }
+
+      currentPertanyaan++;
+      if (currentPertanyaan >= pertanyaan.length) {
+        currentPertanyaan = 0;
+      }
+
+      tampilkanPertanyaan();
+      jawabanElement.value = "";
+    }
+
+    tampilkanPertanyaan();
+
+    document.getElementById("submit").addEventListener("click", cekJawaban);
+  </script>
+</body>
+</html>
